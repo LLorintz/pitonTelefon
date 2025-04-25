@@ -1,56 +1,46 @@
+class Telefon:
+    def __init__(self, modell, gyarto, ar, ev, _5g):
+        self.modell = modell
+        self.gyarto = gyarto
+        self.eladasi_ar = int(ar)
+        self.kiadas_eve = int(ev)
+        self._5g_kepes = _5g.lower() == "igen"
 
+    def regi_vagy_ujabb(self):
+        return "regi" if self.kiadas_eve <= 2021 else "ujabb"
+
+    def __str__(self):
+        return f"{self.gyarto} {self.modell} ({self.eladasi_ar} Ft)"
+
+
+# 1. Beolvasás
 telefonok = []
-
-with open("telefonok-adatok.txt") as f:
+with open("telefonok-adatok.txt", encoding="utf-8") as f:
     f.readline()
     for sor in f:
-        adatok=sor.strip().split(';')
-        telefon = {
-            "modell": adatok[0],
-            "gyarto": adatok[1],
-            "eladasi ar": int(adatok[2]),
-            "kiadas eve": int(adatok[3]),
-            "5g kepes": adatok[4],
-        }
+        adatok = sor.strip().split(";")
+        telefon = Telefon(*adatok)
         telefonok.append(telefon)
 
-sum = sum(t["eladasi ar"] for t in telefonok)
-#for t in telefonok:
-    #sum+=t["eladasi ar"]
-print("A telefonok átlagára: " + str(int(sum/len(telefonok))) + " FT")
+# 2. Átlagár
+atlag = sum(t.eladasi_ar for t in telefonok) // len(telefonok)
+print(f"A telefonok átlagára: {atlag} Ft")
 
+# 3. Legdrágább telefon
+legdragabb = max(telefonok, key=lambda t: t.eladasi_ar)
+print(f"A legdrágább telefon gyártója: {legdragabb.gyarto}, neve: {legdragabb.modell}, ára: {legdragabb.eladasi_ar} Ft")
 
-max_ar = max(t["eladasi ar"] for t in telefonok)
-max_telefon = None
-max_telefon = max(telefonok, key= lambda t: t["eladasi ar"])
-#for t in telefonok:
- #   if t["eladasi ar"]==max_ar:
-  #      max_telefon=t
-print ("a legdrágább telefon gyártoja " + max_telefon["gyarto"] + 
-" neve: " + max_telefon["modell"] + " ára: " + str(max_telefon["eladasi ar"]))
+# 4. 5G-képes telefon keresése adott gyártótól
+gyarto = input("Írd be a gyártó nevét: ").strip().lower()
+van = any(t.gyarto.lower() == gyarto and t._5g_kepes for t in telefonok)
 
-
-telefon_gyarto = input("ird be a gyártó nevét: ")
-telefon = None
-for t in telefonok:
-    if t["gyarto"].lower() == telefon_gyarto.lower().strip():
-        if t["5g kepes"] == "igen":
-            telefon = t
-if telefon:
-    print("igen van " + str(telefon))
+if van:
+    print("Van 5G-képes telefon ettől a gyártótól.")
 else:
-    print("nincs ilyen telefon")
+    print("Nincs ilyen telefon.")
 
-telefon = None
-any(t["gyarto"]==telefon_gyarto and t["gyarto"] for t in telefonok)
-
-def regi(t):
-    if t<=2021:
-        return "regi"
-    else:
-        return "ujabb"
-
+# 5. Apple export fájlba
 with open("apple-export.txt", "w", encoding="utf-8") as f:
     for t in telefonok:
-        if t["gyarto"].lower() == "apple":
-            f.write(t["modell"] + " " + regi(t["kiadas eve"]) + "\n")
+        if t.gyarto.lower() == "apple":
+            f.write(f"{t.modell} {t.regi_vagy_ujabb()}\n")
