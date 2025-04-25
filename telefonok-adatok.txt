@@ -1,0 +1,25 @@
+﻿modell;gyártó;eladási ár;kiadás éve;5g képes
+Redmi Note 12 Pro;Xiaomi;80000;2023;igen
+Iphone 15;Apple;399990;2023;igen
+Galaxy S24 Ultra;Samsung;579990;2024;igen
+Edge 40;Motorola;124990;2023;igen
+Nokia 110;Nokia;8990;2012;nem
+Nokia C12;Nokia;34590;2023;nem
+X6;Honor;44990;2022;nem
+Outlet 10;Huawei;79900;2022;nem
+Blade A71;ZTE;29990;2021;nem
+Iphone 14;Apple ;279990;2022;igen
+Iphone 13 Pro Max;Apple;265990;2021;igen
+Galaxy A05S;Samsung;59990;2023;nem
+Magic 6 Lite;Honor;119990;2023;igen
+Nord 3;OnePlus;184000;2024;igen
+Armor 23 Ultra;Ulefone;174990;2023;igen
+Iphone Xs Max;Apple;120000;2018;nem
+Note 40 Pro;Infinix;99900;2024;nem
+Galaxy Z Fold 6;Samsung;979000;2024;igen 
+Iphone SE;Apple;24990;2016;nem
+Nubia Neo;ZTE;89990;2023;igen
+Alcatel 1;Alcatel ;37400;2021;nem
+Spark 20 Pro;Tecno;79999;2023;nem
+Galaxy S21 FE;Samsung;118990;2022;igen
+Iphone 15 Pro Max;Apple;518990;2023;igen
